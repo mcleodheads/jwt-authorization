@@ -39,7 +39,7 @@ export const logoutRequest = createAsyncThunk(
             const response = await userLogout()
             dispatch(logout(response))
         } catch (e) {
-            rejectWithValue(e.message)
+            return rejectWithValue(e.message)
         }
     }
 )
@@ -51,7 +51,7 @@ export const checkAuth = createAsyncThunk(
             const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
             dispatch(check(response))
         } catch (e) {
-            rejectWithValue(e.message)
+            return rejectWithValue(e.message)
         }
     }
 )
@@ -62,8 +62,6 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         registration(state, action) {
-            console.log(state)
-            console.log(action)
             localStorage.setItem('token', action.payload.data.accessToken)
             state.isAuth = true
         },
