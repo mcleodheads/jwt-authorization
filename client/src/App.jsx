@@ -61,7 +61,8 @@ const App = () => {
             {!user.isAuth && <button onClick={handleRegistration}>Register</button>}
             {
                 user.isAuth ? (
-                    <>
+                    <div>
+                        <h2>Вы вошли как {user.info.email}</h2>
                         <button onClick={handleLogout}>Log out</button>
                         <button onClick={getUsers}>Get users</button>
                         <div>
@@ -73,7 +74,7 @@ const App = () => {
                                 ))
                             }
                         </div>
-                    </>
+                    </div>
                 ) : null
             }
 

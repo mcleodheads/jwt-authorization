@@ -5,6 +5,7 @@ import {API_URL, userLogin, userLogout, userRegistration} from "../../http/API";
 
 const initialState = {
     isAuth: false,
+    info: {}
 }
 
 export const registrationRequest = createAsyncThunk(
@@ -25,7 +26,6 @@ export const loginRequest = createAsyncThunk(
         try {
             const response = await userLogin(email, password)
             dispatch(login(response))
-            return response.data
         } catch (e) {
             return rejectWithValue(e.message)
         }
@@ -64,10 +64,12 @@ const userSlice = createSlice({
         registration(state, action) {
             localStorage.setItem('token', action.payload.data.accessToken)
             state.isAuth = true
+            state.info = {...action.payload.data.user}
         },
         login(state, action) {
             localStorage.setItem('token', action.payload.data.accessToken)
             state.isAuth = true
+            state.info = {...action.payload.data.user}
         },
         logout(state, action) {
             localStorage.removeItem('token')
