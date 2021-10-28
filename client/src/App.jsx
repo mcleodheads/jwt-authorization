@@ -68,7 +68,7 @@ const App = () => {
                         <div>
                             {
                                 users.map(user => (
-                                    <div>
+                                    <div key={user.email}>
                                         {user.email}
                                     </div>
                                 ))
