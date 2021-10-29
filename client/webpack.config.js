@@ -14,7 +14,11 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, "src"),
-        historyApiFallback: true
+        proxy: {
+            '/api': {
+                target: 'http://localhost:5000',
+            }
+        }
     },
     module: {
         rules: [

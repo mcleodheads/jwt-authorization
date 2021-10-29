@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from "axios";
 
-import {API_URL, userLogin, userLogout, userRegistration} from "../../http/API";
+import {userLogin, userLogout, userRegistration} from "../../http/API";
 
 const initialState = {
     isAuth: false,
@@ -48,7 +48,7 @@ export const checkAuth = createAsyncThunk(
     'checkAuth',
     async(_, {rejectWithValue, dispatch}) => {
         try {
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
+            const response = await axios.get(`/api/refresh`, {withCredentials: true})
             dispatch(check(response))
         } catch (e) {
             return rejectWithValue(e.message)

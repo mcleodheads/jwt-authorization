@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {checkAuth, loginRequest, logoutRequest, registrationRequest} from "./store/reducers/userSlice";
-import api from "./http/API";
+import axios from "axios";
+
 
 const App = () => {
     const [email, setEmail] = useState('qwerty@gmail.com')
@@ -36,7 +37,7 @@ const App = () => {
 
     const getUsers = async () => {
         try {
-            const response = await api.get('/users')
+            const response = await axios.get('/api/users')
             setUsers(response.data)
         } catch (e) {
             console.log(e.message)
@@ -55,7 +56,7 @@ const App = () => {
                 placeholder={'Password'}
                 onChange={e => setPassword(e.target.value)}
                 value={password}
-                type="text"
+                type="password"
             />
             {!user.isAuth && <button onClick={handleLogin}>Log in</button>}
             {!user.isAuth && <button onClick={handleRegistration}>Register</button>}
