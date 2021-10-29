@@ -1,11 +1,6 @@
 import axios from "axios";
 
-// export const API_URL = 'http://localhost:5000/api'
 
-// const api = axios.create({
-//     withCredentials: true,
-//     baseURL: API_URL
-// })
 
 
 axios.interceptors.request.use((config) => {
@@ -20,7 +15,7 @@ axios.interceptors.response.use(config => {
     if (error.response.status === 401 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true
         try {
-            const response = await axios.get(`/refresh`, {withCredentials: true}) //${API_URL}
+            const response = await axios.get(`/refresh`, {withCredentials: true})
             localStorage.setItem('token', response.data.accessToken)
             return axios.request(originalRequest)
         } catch (e) {
